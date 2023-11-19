@@ -23,8 +23,10 @@ function App() {
 
   return (
     <Wrapper>
-      <FomrNote />
-      <GridNotes notes={notes} />
+      <div className="max-w-7xl">
+        <FomrNote />
+        <GridNotes notes={notes} />
+      </div>
     </Wrapper>
   )
 }
