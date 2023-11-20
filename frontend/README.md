@@ -17,7 +17,7 @@
 
 <table>
   <tr>
-  <td>Frontend</th>
+  <td>Frontend</td>
     <td>React</td>
     <td>tailwindCSS</td>
     <td>Axios</td>
@@ -25,7 +25,7 @@
     <td>phosphor-icons</td>
     <td>ESLint</td>
   </tr>
-    <td>Backend</th>
+    <td>Backend</td>
     <td>mysql</td>
     <td>node</td>
     <td>express</td>
