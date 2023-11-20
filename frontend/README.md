@@ -1,4 +1,5 @@
 <center><img src=".\src\assets\Screenshot_1.png"></center>
+<center><img src=".\src\assets\Screenshot_2.png"></center>
 
 > Status: building ⚠️
 
