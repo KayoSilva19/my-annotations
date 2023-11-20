@@ -28,13 +28,13 @@ function App() {
         <div className="max-w-7xl">
           <FomrNote getUser={getUser} setOnEdit={setOnEdit} onEdit={onEdit} />
           {notes.length === 0 ? (
+            ''
+          ) : (
             <GridNotes
               notes={notes}
               setNotes={setNotes}
               setOnEdit={setOnEdit}
             />
-          ) : (
-            ''
           )}
         </div>
         <ToastContainer

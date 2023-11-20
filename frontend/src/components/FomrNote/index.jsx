@@ -57,7 +57,7 @@ export function FomrNote({ getUser, setOnEdit, onEdit }) {
           nome: note.nome.value,
           type: note.type.value,
           urgency: note.status.value,
-          annotation: note.status.value,
+          annotation: note.annotation.value,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data))
