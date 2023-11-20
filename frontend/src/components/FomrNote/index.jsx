@@ -64,8 +64,8 @@ export function FomrNote({ getUser, setOnEdit, onEdit }) {
     }
 
     note.nome.value = ''
-    note.type.value = ''
-    note.status.value = ''
+    note.type.value = 'Notas'
+    note.status.value = 'Status'
     note.annotation.value = ''
 
     setOnEdit(null)

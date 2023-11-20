@@ -1,10 +1,14 @@
 import { PencilSimpleLine, Trash } from '@phosphor-icons/react'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { useState } from 'react'
 
 export function GridNotes({ notes, setNotes, setOnEdit }) {
   const styleLi =
-    'bg-zinc-100 p-4 rounded flex justify-between items-center text-zinc-900 relative hover:bg-white text-colors cursor-pointer drop-shadow '
+    'bg-zinc-100 p-4 rounded flex justify-between items-center text-zinc-900 relative hover:bg-white text-colors cursor-pointer drop-shadow'
+
+  const styleButtonDefault =
+    'py-2 px-4 rounded font-medium text-white transition-colors'
 
   function colorStatus(status, pluss) {
     if (status === 'Urgente' && pluss === '+') {
@@ -24,6 +28,8 @@ export function GridNotes({ notes, setNotes, setOnEdit }) {
     }
   }
 
+  const [filterNote, setFilterNote] = useState([...notes])
+
   function handleOnEdit(item) {
     setOnEdit(item)
   }
@@ -39,18 +45,60 @@ export function GridNotes({ notes, setNotes, setOnEdit }) {
       .catch(({ data }) => toast.error(data))
     setOnEdit(null)
   }
+
+  function onFilter(e) {
+    const urgency = e.target.value
+
+    if (urgency === 'Todos') return setFilterNote([...notes])
+
+    const filteredArray = notes.filter((filter) => filter.urgency === urgency)
+    setFilterNote(filteredArray)
+  }
+
   return (
     <>
-      <h1 className="mt-16 font-medium text-[1.3rem] bg-red-400 w-fit text-zinc-900 drop-shadow-md">
-        Anotações
-      </h1>
-      <ul className="flex flex-col gap-4 mt-8">
-        {notes.map((note) => {
+      <div className="mt-16 flex flex-col gap-4 min-[768px]:flex-row  min-[768px]:justify-between min-[768px]:items-center  ">
+        <h1 className="font-medium text-[1.3rem] bg-red-400 w-fit text-zinc-900 drop-shadow-md">
+          Anotações
+        </h1>
+        <div className="flex flex-wrap gap-4">
+          <button
+            value="Urgente"
+            onClick={onFilter}
+            className={`${styleButtonDefault} bg-red-400 hover:bg-red-500 `}
+          >
+            Urgente
+          </button>
+          <button
+            value="Intermediário"
+            onClick={onFilter}
+            className={`${styleButtonDefault} bg-yellow-400 hover:bg-yellow-500`}
+          >
+            Intermediário
+          </button>
+          <button
+            value="Normal"
+            onClick={onFilter}
+            className={`${styleButtonDefault} bg-emerald-400 hover:bg-emerald-500`}
+          >
+            Normal
+          </button>
+          <button
+            value="Todos"
+            onClick={onFilter}
+            className={`${styleButtonDefault} bg-blue-400 hover:bg-blue-500`}
+          >
+            Todos
+          </button>
+        </div>
+      </div>
+      <ul className="flex flex-col gap-4 mt-8 mb-10">
+        {filterNote.map((note) => {
           return (
             <li className={styleLi} key={note.id}>
               <div className="flex flex-col gap-2 ">
                 <span>
-                  <strong className="text-[14px] font-medium">Nome:</strong>{' '}
+                  <strong className="text-[14px] font-medium">Nome:</strong>
                   {note.nome}
                 </span>
                 <span>{note.annotation}</span>

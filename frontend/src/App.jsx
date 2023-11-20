@@ -16,7 +16,7 @@ function App() {
   const getUser = async () => {
     try {
       const response = await axios.get('http://localhost:8000/notes')
-      setNotes(response.data)
+      setNotes(response.data.reverse())
     } catch (err) {
       toast.error(err)
     }
@@ -34,6 +34,7 @@ function App() {
               notes={notes}
               setNotes={setNotes}
               setOnEdit={setOnEdit}
+              getUser={getUser}
             />
           )}
         </div>
