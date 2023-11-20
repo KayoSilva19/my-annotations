@@ -1,16 +1,17 @@
 <center><img src=".\src\assets\Screenshot_1.png"></center>
 <center><img src=".\src\assets\Screenshot_2.png"></center>
 
-> Status: building ⚠️
+> Status: Build ✅
 
 ### Annotation Project
 
 ## Functionalities:
  * note display
- * notr registration
+ * note registration
  * note editing
  * deleting notr
- * Filter notes by status ⚠️
+ * clears fields
+ * filter notes by status
 
 ## Technologies Used:
 
@@ -21,7 +22,6 @@
     <td>tailwindCSS</td>
     <td>Axios</td>
     <td>React-toastify</td>
-    <td>React-magic-motion</td>
     <td>phosphor-icons</td>
     <td>ESLint</td>
   </tr>
