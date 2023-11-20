@@ -22,7 +22,6 @@
     <td>tailwindCSS</td>
     <td>Axios</td>
     <td>React-toastify</td>
-    <td>React-magic-motion</td>
     <td>phosphor-icons</td>
     <td>ESLint</td>
   </tr>
