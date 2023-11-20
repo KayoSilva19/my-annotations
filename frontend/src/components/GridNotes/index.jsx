@@ -1,7 +1,8 @@
-import { PencilSimpleLine, Trash } from '@phosphor-icons/react'
+import { PencilSimpleLine, Siren, Trash } from '@phosphor-icons/react'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { GridFilter } from './GridFilter'
 
 export function GridNotes({ notes, setNotes, setOnEdit }) {
   const styleLi =
@@ -29,6 +30,12 @@ export function GridNotes({ notes, setNotes, setOnEdit }) {
   }
 
   const [filterNote, setFilterNote] = useState([...notes])
+  const [isEmpty, setIsEmpty] = useState(false)
+
+  useEffect(() => {
+    setFilterNote([...notes])
+    setIsEmpty(false)
+  }, [notes])
 
   function handleOnEdit(item) {
     setOnEdit(item)
@@ -47,60 +54,46 @@ export function GridNotes({ notes, setNotes, setOnEdit }) {
   }
 
   function onFilter(e) {
+    setIsEmpty(false)
     const urgency = e.target.value
 
     if (urgency === 'Todos') return setFilterNote([...notes])
 
     const filteredArray = notes.filter((filter) => filter.urgency === urgency)
+
     setFilterNote(filteredArray)
+    if (filteredArray.length === 0) return setIsEmpty(true)
   }
 
   return (
     <>
-      <div className="mt-16 flex flex-col gap-4 min-[768px]:flex-row  min-[768px]:justify-between min-[768px]:items-center  ">
-        <h1 className="font-medium text-[1.3rem] bg-red-400 w-fit text-zinc-900 drop-shadow-md">
-          Anotações
-        </h1>
-        <div className="flex flex-wrap gap-4">
-          <button
-            value="Urgente"
-            onClick={onFilter}
-            className={`${styleButtonDefault} bg-red-400 hover:bg-red-500 `}
-          >
-            Urgente
-          </button>
-          <button
-            value="Intermediário"
-            onClick={onFilter}
-            className={`${styleButtonDefault} bg-yellow-400 hover:bg-yellow-500`}
-          >
-            Intermediário
-          </button>
-          <button
-            value="Normal"
-            onClick={onFilter}
-            className={`${styleButtonDefault} bg-emerald-400 hover:bg-emerald-500`}
-          >
-            Normal
-          </button>
-          <button
-            value="Todos"
-            onClick={onFilter}
-            className={`${styleButtonDefault} bg-blue-400 hover:bg-blue-500`}
-          >
-            Todos
-          </button>
-        </div>
-      </div>
+      <GridFilter onFilter={onFilter} />
       <ul className="flex flex-col gap-4 mt-8 mb-10">
+        {isEmpty && (
+          <li className={styleLi}>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Siren size={32} className="text-red-500" />
+              <span className="text-[1.1rem]">
+                Você não tem tarefas com este status!
+              </span>
+            </div>
+          </li>
+        )}
         {filterNote.map((note) => {
           return (
             <li className={styleLi} key={note.id}>
               <div className="flex flex-col gap-2 ">
-                <span>
-                  <strong className="text-[14px] font-medium">Nome:</strong>
-                  {note.nome}
-                </span>
+                <div className="flex gap-2 flex-wrap">
+                  <span>
+                    <strong className="text-[14px] font-medium">Nome:</strong>
+                    {note.nome}
+                  </span>
+
+                  <span>
+                    <strong className="text-[14px] font-medium">Tipo:</strong>
+                    {note.type}
+                  </span>
+                </div>
                 <span>{note.annotation}</span>
               </div>
               <div className="flex gap-4">

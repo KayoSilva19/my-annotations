@@ -63,14 +63,19 @@ export function FomrNote({ getUser, setOnEdit, onEdit }) {
         .catch(({ data }) => toast.error(data))
     }
 
+    clearFormNote()
+    setOnEdit(null)
+    getUser()
+  }
+
+  function clearFormNote() {
+    const note = ref.current
     note.nome.value = ''
     note.type.value = 'Notas'
     note.status.value = 'Status'
     note.annotation.value = ''
-
-    setOnEdit(null)
-    getUser()
   }
+
   return (
     <>
       <h1 className="mt-8 font-medium text-[1.3rem] bg-yellow-300 w-fit drop-shadow-md text-zinc-950">
@@ -113,10 +118,17 @@ export function FomrNote({ getUser, setOnEdit, onEdit }) {
             className="w-full max-h-[480px] resize-none rounded bg-zinc-200 p-4 outline-none "
           ></textarea>
         </div>
-        <div className="flex justify-end">
+        <div className="flex flex-wrap gap-4 justify-end">
+          <button
+            onClick={clearFormNote}
+            type="button"
+            className="bg-blue-400 py-2 px-4 rounded font-medium text-white w-fit hover:bg-blue-600 hover:scale-110 transition-all duration-200"
+          >
+            Limpar
+          </button>
           <button
             type="submit"
-            className="bg-red-400 py-2 px-4 rounded font-medium text-white w-fit hover:bg-red-600"
+            className="bg-red-400 py-2 px-4 rounded font-medium text-white w-fit hover:bg-red-600 hover:scale-110 transition-all duration-200"
           >
             Salvar
           </button>
