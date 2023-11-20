@@ -9,7 +9,7 @@
  * note display
  * note registration
  * note editing
- * deleting notr
+ * deleting note
  * clears fields
  * filter notes by status
 
