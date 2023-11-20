@@ -1,8 +1,47 @@
-# React + Vite
+<center><img src=".\src\assets\Screenshot_1.png"></center>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Status: building ⚠️
 
-Currently, two official plugins are available:
+### Annotation Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Functionalities:
+ * note display
+ * notr registration
+ * note editing
+ * deleting notr
+ * Filter notes by status ⚠️
+
+## Technologies Used:
+
+<table>
+  <tr>
+  <td>Frontend</th>
+    <td>React</td>
+    <td>tailwindCSS</td>
+    <td>Axios</td>
+    <td>React-toastify</td>
+    <td>React-magic-motion</td>
+    <td>phosphor-icons</td>
+    <td>ESLint</td>
+  </tr>
+    <td>Backend</th>
+    <td>mysql</td>
+    <td>node</td>
+    <td>express</td>
+    <td>nodemon</td>
+</table>
+
+## Installation
+  * Clone the project repository on GitHub.
+  * Navigate to the project directory.
+  * Run the following command to install the dependencies:
+
+```
+$ npm install 
+```
+
+## Running the project
+```
+$ npm run dev
+```
+
