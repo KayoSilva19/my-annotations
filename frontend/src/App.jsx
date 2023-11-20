@@ -27,7 +27,15 @@ function App() {
       <Wrapper>
         <div className="max-w-7xl">
           <FomrNote getUser={getUser} setOnEdit={setOnEdit} onEdit={onEdit} />
-          <GridNotes notes={notes} setNotes={setNotes} setOnEdit={setOnEdit} />
+          {notes.length === 0 ? (
+            <GridNotes
+              notes={notes}
+              setNotes={setNotes}
+              setOnEdit={setOnEdit}
+            />
+          ) : (
+            ''
+          )}
         </div>
         <ToastContainer
           position="top-right"
