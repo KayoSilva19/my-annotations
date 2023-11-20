@@ -11,8 +11,8 @@ export function FomrNote({ getUser, setOnEdit, onEdit }) {
   const stylesSelect =
     'h-10  bg-zinc-300 rounded p-2 text-zinc-800 font-regular md:min-w-[100%] outline-none focus:outline-yellow-300 mt-1 cursor-pointer font-regular'
 
-  const optionType = ['Notas', 'Trabalho', 'Estudos', 'Lembretes', 'Lazer']
-  const optionStatus = ['Status', 'Urgente', 'Intermediário', 'Normal']
+  const optionType = ['Trabalho', 'Estudos', 'Lembretes', 'Lazer']
+  const optionStatus = ['Urgente', 'Intermediário', 'Normal']
 
   const ref = useRef()
 
@@ -94,6 +94,7 @@ export function FomrNote({ getUser, setOnEdit, onEdit }) {
             <input name="nome" type="text" className={stylesInput} />
           </div>
           <div className={stylesContainerInput}>
+            <label className="text-zinc-900 font-normal">Tipo</label>
             <select className={stylesSelect} name="type" id="">
               {optionType.map((option, i) => {
                 return <option key={i}>{option}</option>
@@ -101,6 +102,7 @@ export function FomrNote({ getUser, setOnEdit, onEdit }) {
             </select>
           </div>
           <div className={stylesContainerInput}>
+            <label className="text-zinc-900 font-normal">Status</label>
             <select className={stylesSelect} name="status" id="">
               {optionStatus.map((option, i) => {
                 return <option key={i}>{option}</option>
