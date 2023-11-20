@@ -1,6 +1,8 @@
 import { PencilSimpleLine, Trash } from '@phosphor-icons/react'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
-export function GridNotes({ notes }) {
+export function GridNotes({ notes, setNotes, setOnEdit }) {
   const styleLi =
     'bg-zinc-100 p-4 rounded flex justify-between items-center text-zinc-900 relative hover:bg-white text-colors cursor-pointer drop-shadow '
 
@@ -21,9 +23,25 @@ export function GridNotes({ notes }) {
       return 'bg-emerald-400'
     }
   }
+
+  function handleOnEdit(item) {
+    setOnEdit(item)
+  }
+
+  async function onDelete(id) {
+    axios
+      .delete(`http://localhost:8000/notes/${id}`)
+      .then(({ data }) => {
+        const newArrayNote = notes.filter((mapId) => mapId.id !== id)
+        setNotes(newArrayNote)
+        toast.success(data)
+      })
+      .catch(({ data }) => toast.error(data))
+    setOnEdit(null)
+  }
   return (
     <>
-      <h1 className="mt-16 font-medium text-[1.3rem] bg-red-400 w-fit text-zinc-900">
+      <h1 className="mt-16 font-medium text-[1.3rem] bg-red-400 w-fit text-zinc-900 drop-shadow-md">
         Anotações
       </h1>
       <ul className="flex flex-col gap-4 mt-8">
@@ -51,10 +69,16 @@ export function GridNotes({ notes }) {
                     )}`}
                   ></span>
                 </span>
-                <button className="bg-emerald-500 p-2 rounded text-white hover:scale-110 duration-150">
+                <button
+                  onClick={() => handleOnEdit(note)}
+                  className="bg-emerald-500 p-2 rounded text-white hover:scale-110 hover:bg-emerald-600  trasnsition-all duration-150"
+                >
                   <PencilSimpleLine size={24} />
                 </button>
-                <button className="bg-red-500 p-2 rounded text-white hover:scale-110 duration-150">
+                <button
+                  onClick={() => onDelete(note.id)}
+                  className="bg-red-500 p-2 rounded text-white hover:scale-110 hover:bg-red-600  trasnsition-all duration-150"
+                >
                   <Trash size={24} />
                 </button>
               </div>

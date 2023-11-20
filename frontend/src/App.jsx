@@ -3,14 +3,15 @@ import { Wrapper } from './components/Wrapper'
 import { FomrNote } from './components/FomrNote'
 import { GridNotes } from './components/GridNotes'
 import axios from 'axios'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   const [notes, setNotes] = useState([])
-
+  const [onEdit, setOnEdit] = useState(null)
   useEffect(() => {
     getUser()
-  }, [notes])
+  }, [setNotes])
 
   const getUser = async () => {
     try {
@@ -22,12 +23,25 @@ function App() {
   }
 
   return (
-    <Wrapper>
-      <div className="max-w-7xl">
-        <FomrNote />
-        <GridNotes notes={notes} />
-      </div>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <div className="max-w-7xl">
+          <FomrNote getUser={getUser} setOnEdit={setOnEdit} onEdit={onEdit} />
+          <GridNotes notes={notes} setNotes={setNotes} setOnEdit={setOnEdit} />
+        </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </Wrapper>
+    </>
   )
 }
 
